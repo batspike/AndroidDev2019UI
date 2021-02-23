@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button_click_me).setOnClickListener{
             val userName = findViewById<EditText>(R.id.nameInput).text.toString()
             val password = findViewById<EditText>(R.id.passwordInput).text.toString()
-            Toast.makeText(this,
-                "Name: $userName, Password: $password",
-                Toast.LENGTH_LONG).show()
+            // using string resouce allow use to provide localisation to our message
+            val message = getString(R.string.login_message, userName, password)
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
     }
 
