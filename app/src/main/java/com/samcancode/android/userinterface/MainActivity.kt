@@ -1,9 +1,10 @@
 package com.samcancode.android.userinterface
 
-import android.graphics.Color
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -15,21 +16,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        container = findViewById(R.id.linearLayout)
-
-        // programatically add 3 TextView widgets
-        addTextView("Hello")
-        addTextView("From")
-        addTextView("Android")
-
-    }
-
-    private fun addTextView(label:String) {
-        val view = TextView(this)
-        view.text = label
-        view.textSize = 28f  // 28dp
-        view.setTextColor(Color.parseColor("#FF0000"))
-        container.addView(view)
+        findViewById<Button>(R.id.button_click_me).setOnClickListener{
+            val userName = findViewById<EditText>(R.id.nameInput).text.toString()
+            val password = findViewById<EditText>(R.id.passwordInput).text.toString()
+            Toast.makeText(this,
+                "Name: $userName, Password: $password",
+                Toast.LENGTH_LONG).show()
+        }
     }
 
 }
