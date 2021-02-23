@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +22,22 @@ class MainActivity : AppCompatActivity() {
             val password = findViewById<EditText>(R.id.passwordInput).text.toString()
             // using string resouce allow use to provide localisation to our message
             val message = getString(R.string.login_message, userName, password)
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+
+            // Toast messages can be suppressed by user via the O/S. So they are
+            // not ideal for display important info specifically in our app. Better to use snackbar.
+            // Snackbar should be used with CoordinatorLayout component as its root element, or
+            // within a child of the CoordinatorLayout. Snackbar will automatically reference
+            // itself up to the parent that is a CoordinatorLayout. Snackbar also can have a
+            // button for additional functionality.
+//            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            Snackbar.make(it, message, Snackbar.LENGTH_LONG)
+                    .setAction("Click Me", { showAnotherMessage() })
+                    .show()
         }
+    }
+
+    private fun showAnotherMessage() {
+        Toast.makeText(this, "You Clicked!", Toast.LENGTH_LONG).show()
     }
 
 }
